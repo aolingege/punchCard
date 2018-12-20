@@ -1,0 +1,14 @@
+<view class="edit-warp">
+    <view class="info-warp">
+        <input bindinput="nicknameInput" maxlength="30" placeholder="" value="{{userInfo.nickname}}"></input>
+    </view>
+    <view class="info-warp">
+        <input bindinput="signatureInput" maxlength="30" placeholder="" value="{{userInfo.signature}}"></input>
+    </view>
+    <view bindtap="onChangUser" class="edit-ok">确认修改</view>
+    <view class="msg-set">
+        <view>通知设置</view>
+        <switch bindchange="canMsgChange" checked="{{isCanMsg}}" color="#29a1f7"></switch>
+    </view>
+    <view bindtap="quitReLogin" class="quit-back">更换头像</view>
+</view>

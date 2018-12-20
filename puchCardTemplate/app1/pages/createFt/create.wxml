@@ -1,0 +1,24 @@
+<view class="create-warp">
+    <view class="create-title">圈子名称</view>
+    <input bindinput="bindReplaceInput" class="new-create" maxlength="50" placeholder="例如：背单词打卡（50字以内）"></input>
+    <view class="create-title">圈子规则</view>
+    <textarea bindinput="bindRuleInput" class="new-rule" maxlength="250" placeholder="例如：请大家发布与圈子主题相关的内容，公告只有创建圈子的圈主可以修改。"></textarea>
+    <view class="desc-warp">
+        <image class="checked-icon" src="/images/ischeck_icon.png"></image>
+        <text class="create-desc">你们的专属打卡圈</text>
+    </view>
+    <view class="desc-warp">
+        <image class="checked-icon" src="/images/ischeck_icon.png"></image>
+        <text class="create-desc">其他成员邀请才能进入</text>
+    </view>
+    <view class="desc-warp">
+        <image class="checked-icon" src="/images/ischeck_icon.png"></image>
+        <text class="create-desc">打卡内容圈内成员可见</text>
+    </view>
+    <login-view bind:onLoginSuccess="createHabit">
+        <view class="create-btn">确认创建</view>
+    </login-view>
+    <image class="welfare" mode="widthFix" src="http://xiaeke.oss-cn-shanghai.aliyuncs.com/habit/qun/fuli_group01.png"></image>
+</view>
+<view bindtap="backHome" class="back-home-btn" wx:if="{{needHome}}">首页</view>
+<text bindtap="toDirect" class="direct-web">公众号直达圈子服务</text>

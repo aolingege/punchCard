@@ -1,0 +1,3 @@
+<canvas canvasId="shareCanvas" class="share-canvas"></canvas>
+<view bindtap="saveCard" class="share-save-btn">保存图片</view>
+<view class="share-desc">保存到相册，分享给朋友，也可以直接放到公众号文章中</view>

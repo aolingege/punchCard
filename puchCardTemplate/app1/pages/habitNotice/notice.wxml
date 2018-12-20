@@ -1,0 +1,6 @@
+<view class="edit-warp">
+    <view class="info-warp">
+        <textarea bindinput="noticeInput" maxlength="250" placeholder="这里写圈子的公告~" value="{{notice}}"></textarea>
+    </view>
+    <view bindtap="onChangeNotice" class="edit-ok">发布公告</view>
+</view>

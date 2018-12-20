@@ -1,0 +1,9 @@
+<view bindtap="handleTap" class="container" wx:if="{{isLogin}}">
+    <slot></slot>
+</view>
+<view class="container" wx:else>
+    <button bindgetuserinfo="handleUserInfo" class="auth" openType="getUserInfo">
+    授权登录
+  </button>
+    <slot></slot>
+</view>

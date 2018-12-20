@@ -1,0 +1,27 @@
+<view class="content-warp">
+    <view class="habit-header">
+        <image class="habit-icon" src="{{currentIcon==''?habitData.icon_url:currentIcon}}"></image>
+        <view class="habit-note">
+            <view>{{habitName}}</view>
+            <view class="habit-members">已坚持{{insistDay}}天</view>
+        </view>
+        <button bindtap="onChange" class="habit-change-btn">确定修改</button>
+    </view>
+    <scroll-view scrollY class="list-scroll">
+        <view class="icon-list-warp">
+            <view bindtap="onSelectIcon" class="icon-view" data-icon="{{item.url}}" wx:for="{{iconList}}" wx:key="index">
+                <image src="{{item.url}}"></image>
+            </view>
+            <view class="more-warp">
+                <view bindtap="onLoadMore" class="icon-more">{{loadMoreText}}</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view bindtap="toFeedback" class="connect-btn">联系客服定制图标</view>
+<view class="option-warp">
+    <button class="record-card-btn" openType="share">
+        <view>分享</view>
+        <image class="share-icon" src="/images/bottom_share.png"></image>
+    </button>
+</view>

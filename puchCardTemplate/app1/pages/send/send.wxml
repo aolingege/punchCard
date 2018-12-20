@@ -1,0 +1,14 @@
+<view class="send-warp">
+    <view class="title-warp">
+        <textarea autoHeight="true" bindinput="contentInput" maxlength="5000" placeholder="写下今天做了什么和收获吧~"></textarea>
+    </view>
+    <view bindtap="selectImage" class="content-wripper {{imageSrc?'':'content-wripper-border'}}">
+        <image class="send-icon" src="../../images/send_photo.png" wx:if="{{!imageSrc}}"></image>
+        <image class="send-image" mode="widthFix" src="{{imageSrc}}" wx:if="{{imageSrc}}"></image>
+    </view>
+    <view class="send-desc">
+        <text wx:if="{{!canLook}}">*发布的内容仅个人可见</text>
+        <text wx:if="{{canLook}}">*发布的内容已公开(或设置群公开则群公开)</text>
+    </view>
+    <view bindtap="onSend" class="send-btn">发布</view>
+</view>

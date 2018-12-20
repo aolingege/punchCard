@@ -1,0 +1,6 @@
+<view catchlongtap="saveCardShow" class="canvas-warp">
+    <canvas canvasId="shareCanvas" class="share-canvas" style="height:{{canvasHeight}}px"></canvas>
+    <cover-view bindtap="backHome" class="back-home-btn" wx:if="{{page==1}}">首页</cover-view>
+    <view class="bottom-warp"></view>
+</view>
+<cover-view bindtap="saveCard" class="save-btn">保存今日卡片</cover-view>

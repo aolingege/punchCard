@@ -1,0 +1,22 @@
+<view class="page-warp" scrollY="true" style="height: 100%;" wx:if="{{!isEmpty}}">
+    <view wx:if="{{messageList.length>0}}">
+        <view class="scroll-view-item" wx:for="{{messageList}}" wx:for-index="idx" wx:key="id">
+            <view class="item-day">
+                <image bindtap="toUserPage" class="item-icon" data-user="{{item.sender_id}}" src="{{item.avatar_small}}"></image>
+                <view catchtap="toDetail" class="item-habit" data-id="{{item.key_id}}" data-index="{{idx}}">
+                    <view wx:if="{{item.type==1}}">{{item.nickname}}<text>评论了你</text>
+                    </view>
+                    <view wx:if="{{item.type==2}}">{{item.nickname}}<text>点赞了你的记录</text>
+                    </view>
+                    <view wx:if="{{item.type==3}}">{{item.nickname}}将你移出了圈子</view>
+                    <view>{{item.content}}</view>
+                </view>
+            </view>
+            <view class="red-dot" wx:if="{{item.has_read==0}}"></view>
+        </view>
+    </view>
+    <view class="loadmore">
+        <text>{{loadmore==-1?'到底了~':loadmore==1?'正在加载...':'上拉加载'}}</text>
+    </view>
+</view>
+<view class="empty-warp" wx:if="{{isEmpty}}">暂无消息</view>

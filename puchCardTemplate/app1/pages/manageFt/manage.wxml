@@ -1,0 +1,23 @@
+<view class="direct-warp">
+    <text bindtap="toDirect" class="direct-web">公众号直达圈子服务</text>
+    <view bindtap="toCopyDirect">直达路径：
+    <text>pages/checkFt/check?scene={{id}}</text>
+    </view>
+</view>
+<view class="ft-all">
+    <text>总人数: {{ft_user}}</text>
+    <text>{{isLastDay?'昨天':'今天'}}已打卡: {{ft_check}}</text>
+    <text>未打卡: {{ft_user-ft_check}}</text>
+</view>
+<view class="fter-view-item" wx:for="{{userList}}" wx:key="id">
+    <view class="fter-item-ans">
+        <image src="{{item.avatar_small}}"></image>
+        <view class="fter-item-day">
+            <view>{{item.nickname}}</view>
+            <view>已坚持
+        <text style="color:#3dcc79"> {{item.days}} </text>天</view>
+        </view>
+        <view class="check-status">{{isLastDay?'昨天':'今天'}}{{item.is_check==1?'已打卡':'未打卡'}}</view>
+        <button bindtap="romoveGrouper" class="remind-remove" data-user="{{item.user_id}}">移出</button>
+    </view>
+</view>

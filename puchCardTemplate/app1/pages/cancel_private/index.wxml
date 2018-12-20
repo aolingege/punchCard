@@ -1,0 +1,17 @@
+<view class="container">
+    <image src="../../images/lock.png"></image>
+    <view class="desc">
+        <view class="title">{{title}}</view>
+        <view class="warning">
+            <text wx:if="{{errorCount<5}}">取消隐私密码前，需要验证您的身份</text>
+            <text wx:else>您已多次输入错误，请{{second}}秒后重新输入</text>
+        </view>
+    </view>
+    <view class="password">
+        <view class="underline">
+            <view class="{{current==index?'focus':''}}" wx:for="{{numbers}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <input bindinput="handleInput" focus="{{true}}" maxlength="4" type="number" value="{{value}}"></input>
+    </view>
+    <view class="forget">忘记密码？</view>
+</view>

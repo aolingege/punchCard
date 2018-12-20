@@ -1,0 +1,18 @@
+<view class="container">
+    <image src="../../images/lock.png"></image>
+    <view class="desc">
+        <view class="title">{{title}}</view>
+        <view class="warning">{{warning}}</view>
+    </view>
+    <view class="password" wx:if="{{!showEmail}}">
+        <view class="underline">
+            <view class="{{current==index?'focus':''}}" wx:for="{{numbers}}" wx:key="{{index}}">{{item}}</view>
+        </view>
+        <input bindinput="handleInput" focus="{{true}}" maxlength="4" type="number" value="{{value}}"></input>
+        <button bindtap="handleResetPsw" class="confirm" disabled="{{!resetReady}}" wx:if="{{isRetPsw}}">确定</button>
+    </view>
+    <view class="email" wx:else>
+        <input bindinput="handleInputEmail" focus="{{true}}" type="text" value="{{email}}"></input>
+        <button bindtap="handleConfirm" class="confirm" disabled="{{!isValidEmail}}">确定</button>
+    </view>
+</view>

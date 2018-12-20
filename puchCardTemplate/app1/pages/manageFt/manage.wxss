@@ -1,0 +1,99 @@
+.ft-all {
+    display: flex;
+    flex-direction: row;
+    height: 50rpx;
+    padding-top: 32rpx;
+    text-align: center;
+    background: #fff;
+    font-size: 28rpx;
+    color: #29a1f7;
+    font-weight: bold;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+}
+
+.ft-all>text {
+    flex: 1;
+    text-align: center;
+}
+
+.direct-warp {
+    background: #fff;
+    text-align: center;
+    padding-top: 20rpx;
+    font-size: 28rpx;
+    line-height: 40rpx;
+    color: #666666;
+}
+
+.direct-warp .direct-web {
+    color: #29a1f7;
+}
+
+.fter-view-item {
+    background-color: #fff;
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    padding-top: 35rpx;
+    padding-bottom: 35rpx;
+    margin-bottom: 10rpx;
+}
+
+.fter-item-ans {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.fter-item-ans image {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+}
+
+.fter-item-day {
+    height: 80rpx;
+    padding-left: 25rpx;
+    flex: 1;
+    color: #666;
+    font-size: 32rpx;
+}
+
+.fter-item-day>view {
+    color: #666;
+    font-size: 30rpx;
+}
+
+.fter-item-day>view:last-child {
+    padding-top: 5rpx;
+    color: #999;
+    font-size: 28rpx;
+}
+
+.check-status {
+    margin-top: 10rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    padding-right: 20rpx;
+    font-size: 28rpx;
+    color: #999;
+}
+
+.remind-remove {
+    margin-top: 10rpx;
+    margin-right: 15rpx;
+    border: none;
+    padding: 0rpx;
+    height: 58rpx;
+    text-align: center;
+    line-height: 58rpx;
+    background: #fbc955;
+    border-radius: 29rpx;
+    font-size: 26rpx;
+    color: #fff;
+    width: 120rpx;
+}
+
+.remind-remove::after {
+    border: none;
+}

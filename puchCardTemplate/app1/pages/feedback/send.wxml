@@ -1,0 +1,12 @@
+<view class="send-warp">
+    <view class="add-ft">
+        <text>加入萌友群，反馈问题、意见
+  和萌友一起遇见更好的自己</text>
+    </view>
+    <image bindtap="previewImage" class="support-image" mode="widthFix" src="http://xiaeke.oss-cn-shanghai.aliyuncs.com/habit/qun/mengyaqun02.jpg"></image>
+    <button class="share-btn" openType="contact" sessionFrom="megnya">
+        <view class="account-item">客服反馈</view>
+        <image class="account-arrow" src="/images/arrow.png"></image>
+    </button>
+    <official-account binderror="officialError" bindload="officialOk" class="official"></official-account>
+</view>

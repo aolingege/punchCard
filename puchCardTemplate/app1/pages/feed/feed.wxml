@@ -1,0 +1,61 @@
+<view class="heart-note-warp" scrollY="true" style="height: 100%;">
+    <view class="swiper-tab">
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==0?'on':''}}" data-current="0">热门</view>
+        <view class="swiper-tab-list {{currentTab==1?'on':''}}">
+            <login-view bind:onLoginSuccess="swichNav" data-current="1">榜样</login-view>
+        </view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==2?'on':''}}" data-current="2">最新</view>
+        <button class="heart-share-btn" openType="share">推荐</button>
+    </view>
+    <view class="scroll-view-item" wx:for="{{feedList}}" wx:for-index="idx" wx:key="id">
+        <view class="item-ans">
+            <image bindtap="toUserPage" data-user="{{item.user_id}}" src="{{item.avatar_small}}"></image>
+            <view class="item-day">
+                <view bindtap="toUserPage" data-user="{{item.user_id}}">{{item.nickname==''?'萌友':item.nickname}}</view>
+                <view class="insist">坚持
+          <text style="color:#666666">#{{item.habit_name}}#</text>
+                </view>
+            </view>
+            <view class="item-pv">
+                <view>{{item.add_time}}</view>
+                <view class="days">{{item.days}}天</view>
+            </view>
+        </view>
+        <image bindtap="handleViewImage" class="item-pic" data-src="{{item.pic_url+'?x-oss-process=image/resize,w_750'}}" mode="widthFix" src="{{item.pic_url+'?x-oss-process=image/resize,m_fill,h_600,w_750'}}" wx:if="{{item.pic_url}}"></image>
+        <view class="item-title" wx:if="{{item.note!=''}}">
+            <text>{{item.note}}</text>
+        </view>
+        <view class="comment-list-warp">
+            <view bindtap="clickReply" class="comment-item" data-id="{{commentItem.id}}" data-index="{{idx}}" data-user="{{commentItem.nickname}}" wx:for="{{item.comment}}" wx:for-index="commentIdx" wx:for-item="commentItem" wx:key="commentItem.id">
+                <text>{{commentItem.nickname}}</text>
+                <text style="color: #666666" wx:if="{{commentItem.atUserId}}">回复</text>
+                <text wx:if="{{commentItem.atUserId}}">{{commentItem.atUser}}</text>:{{commentItem.content}}
+      </view>
+        </view>
+        <input adjustPosition="true" bindblur="hideComment" bindconfirm="sendComment" class="comment-input" confirmType="发布" cursorSpacing="20" data-id="{{item.id}}" data-index="{{idx}}" focus="{{item.isComment}}" placeholder="{{atUserName}}" type="text" wx:if="{{item.isComment}}"></input>
+        <view class="item-time">
+            <view bindtap="likeHabitNote" class="insist-like" data-id="{{idx}}">
+                <image src="/images/like_pressed.png" wx:if="{{item.isLike}}"></image>
+                <image src="/images/like_normal.png" wx:else></image>{{item.prop_count}}</view>
+            <view class="insist-comment">
+                <login-view bind:onLoginSuccess="clickComment" data-index="{{idx}}" payload="{{item.habit_id}}">
+                    <form data-id="{{item.habit_id}}" reportSubmit="true">
+                        <button class="commnent-btn" formType="submit">
+                            <image src="/images/comment_normal.png"></image>{{item.comment_count}}
+            </button>
+                    </form>
+                </login-view>
+            </view>
+            <button class="insist-share" data-day="{{item.days}}" data-id="{{item.id}}" data-name="{{item.habit_name}}" data-path="{{item.pic_url+'?x-oss-process=image/resize,w_750,h_600'}}" openType="share">
+                <image src="/images/ft_share.png"></image>
+            </button>
+        </view>
+    </view>
+    <view class="loadmore" wx:if="{{!isEmpty}}">
+        <text>{{loadmore==-1?'到底了~':loadmore==1?'正在加载...':'上拉加载'}}</text>
+    </view>
+    <view class="note-empty" wx:if="{{isEmpty}}">
+        <text>你关注的伙伴还没有发布动态哦
+    <br></br>去中学堂关注更多伙伴吧</text>
+    </view>
+</view>

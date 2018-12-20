@@ -1,0 +1,13 @@
+<view class="about-warp">
+    <view class=".recommend-title">推荐文章</view>
+    <scroll-view scrollY class="list-scroll">
+        <view>
+            <view bindtap="onArticle" class="article-item" data-title="{{item.title}}" data-url="{{item.url}}" wx:for="{{articleList}}" wx:key="index">
+                <view>{{item.title}}</view>
+                <view class="article-time">{{item.time}}</view>
+            </view>
+            <view class="about-btn">更多精彩培养好习惯文章，请关注萌芽习惯公众号</view>
+        </view>
+    </scroll-view>
+</view>
+<view bindtap="backHome" class="back-home-btn" wx:if="{{isShare!=0}}">首页</view>

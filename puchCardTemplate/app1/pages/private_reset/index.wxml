@@ -1,0 +1,21 @@
+<view class="container">
+    <image src="../../images/lock.png"></image>
+    <view class="desc">
+        <view class="title">找回密码</view>
+        <view class="warning">
+            <view wx:if="{{!codeHasSend}}">
+                <view>您的密保邮箱为：</view>
+                <view>{{email}}</view>
+                <view>请点击获取邮箱验证码</view>
+            </view>
+            <view wx:else>验证码已发送至：{{email}}，请注意查收</view>
+        </view>
+    </view>
+    <view class="email" wx:if="{{!codeHasSend}}">
+        <button bindtap="handleFetchCode">获取邮箱验证码</button>
+    </view>
+    <view class="email code" wx:else>
+        <input bindinput="handleInputCode" focus="{{true}}" placeholder="验证码" type="text" value="{{code}}"></input>
+        <button bindtap="handleVerifyCode" disabled="{{code.length<4}}">确定</button>
+    </view>
+</view>

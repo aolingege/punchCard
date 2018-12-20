@@ -1,0 +1,45 @@
+<view class="record-warp">
+    <view class="record-today">{{today}}</view>
+    <view class="check-btn-warp">
+        <view bindtap="startCheck" class="checked-btn" wx:if="{{isCheck}}">
+            <image class="check-image" src="../../images/checked.png"></image>
+        </view>
+        <form bindsubmit="submitCheck" reportSubmit="true" wx:else>
+            <button bindtap="startCheck" class="check-btn" formType="submit">
+                <image class="check-image" src="../../images/unchecked.png"></image>
+            </button>
+        </form>
+    </view>
+    <view bindtap="startRecord" class="record-text" wx:if="{{isCheck&&!isRecord&&canNote}}">记录心情</view>
+</view>
+<view class="divider"></view>
+<view class="statistics-warp">
+    <view class="statistics-child">
+        <view>开始天数</view>
+        <view>{{startNum+1}}</view>
+    </view>
+    <view class="statistics-child">
+        <view>坚持天数</view>
+        <view>{{checkNum}}</view>
+    </view>
+    <view class="statistics-child">
+        <view>连续天数</view>
+        <view>{{continueCount}}</view>
+    </view>
+</view>
+<view class="divider"></view>
+<view bindtap="toCalendar">
+    <view class="date-week">
+        <image class="statistics-icon" src="/images/statistics_icon.png"></image>
+        <view class="statistics-week">坚持周统计</view>
+        <view class="statistics-calendar">日历统计</view>
+        <image class="statistics-go" src="/images/arrow.png"></image>
+    </view>
+    <view class="date-warp">
+        <view class="date-child" wx:for="{{dateInfo}}" wx:key="unique">
+            <view>{{item.day}}</view>
+            <image src="../../images/small_checked.png" wx:if="{{item.isCheck}}"></image>
+            <image src="../../images/small_unchecked.png" wx:else></image>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,166 @@
+.record-warp {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    padding-top: 100rpx;
+    padding-bottom: 100rpx;
+}
+
+.record-today {
+    position: absolute;
+    top: 30rpx;
+    width: 100%;
+    text-align: center;
+    font-size: 28rpx;
+    color: #ddd;
+}
+
+.check-btn-warp {
+    position: relative;
+    height: 250rpx;
+    width: 250rpx;
+    padding: 20rpx;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    background-color: rgba(210,210,210,0.2);
+}
+
+.check-btn {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 0rpx;
+}
+
+.check-btn:after {
+    border: 0;
+}
+
+.checked-btn {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: #29a1f7;
+    border-radius: 50%;
+}
+
+.record-text {
+    position: absolute;
+    bottom: 30rpx;
+    right: 30rpx;
+    text-align: center;
+    line-height: 56rpx;
+    font-size: 24rpx;
+    color: #fff;
+    background: #fbc955;
+    width: 160rpx;
+    height: 56rpx;
+    border-radius: 28rpx;
+}
+
+.check-image {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 17%;
+    height: 60%;
+    width: 60%;
+}
+
+.divider {
+    background: #eee;
+    height: 20rpx;
+}
+
+.statistics-warp {
+    background: #fff;
+    font-size: 30rpx;
+    color: #666;
+    display: flex;
+    flex-direction: row;
+    padding: 25rpx 0;
+    box-sizing: border-box;
+}
+
+.statistics-child {
+    flex: 1;
+    text-align: center;
+}
+
+.statistics-child>view:first-child {
+    color: #666;
+}
+
+.statistics-child:first-child {
+    border-right: 1rpx #f2f2f2 solid;
+}
+
+.statistics-child:last-child {
+    border-left: 1rpx #f2f2f2 solid;
+}
+
+.statistics-child>view:first-child {
+    padding-bottom: 14rpx;
+}
+
+.date-week {
+    background: #fff;
+    width: 100%;
+    text-align: center;
+    padding-top: 32rpx;
+    padding-bottom: 15rpx;
+    font-size: 32rpx;
+    color: #666;
+    flex-direction: row;
+    display: flex;
+}
+
+.date-week .statistics-icon {
+    width: 34rpx;
+    height: 34rpx;
+    margin-left: 30rpx;
+    margin-top: 4rpx;
+}
+
+.date-week .statistics-week {
+    flex: 1;
+    text-align: left;
+    padding-left: 20rpx;
+}
+
+.date-week .statistics-calendar {
+    font-size: 30rpx;
+    color: #999;
+    padding-right: 8rpx;
+}
+
+.date-week .statistics-go {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 20rpx;
+    margin-top: 4rpx;
+}
+
+.date-warp {
+    background: #fff;
+    height: 120rpx;
+    font-size: 30rpx;
+    color: #999;
+    display: flex;
+    flex-direction: row;
+    padding-top: 28rpx;
+    padding-bottom: 18rpx;
+}
+
+.date-child {
+    flex: 1;
+    text-align: center;
+}
+
+.date-child>image {
+    margin-top: 24rpx;
+    width: 46rpx;
+    height: 46rpx;
+}

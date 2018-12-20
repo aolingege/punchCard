@@ -1,0 +1,220 @@
+<view>
+    <image bindtap="backHome" class="small-home" src="{{!isLogin||!isJoin?'../../images/back_home_ff.png':'../../images/back_home.png'}}" wx:if="{{isScene}}"></image>
+    <view class="record-warp">
+        <view class="record-today">{{today}}</view>
+        <view class="check-btn-warp">
+            <view bindtap="startCheck" class="checked-btn" wx:if="{{isCheck}}">
+                <image class="check-image" src="../../images/checked.png"></image>
+            </view>
+            <form bindsubmit="submitCheck" reportSubmit="true" wx:else>
+                <button bindtap="startCheck" class="check-btn" formType="submit">
+                    <image class="check-image" src="../../images/unchecked.png"></image>
+                </button>
+            </form>
+        </view>
+        <view bindtap="startRecord" class="record-text" wx:if="{{isCheck}}">{{isRecord?'获取卡片':'记录心情'}}</view>
+    </view>
+    <view class="calendar-warp">
+        <view bindtap="toCalendar" class="calendar-content">
+            <view class="date-week">
+                <image class="statistics-icon" src="/images/statistics_icon.png"></image>
+                <view class="statistics-week">坚持统计</view>
+                <view class="statistics-calendar">已坚持
+          <text>{{checkNum}}</text>天</view>
+                <image class="statistics-go" src="/images/arrow.png"></image>
+            </view>
+            <view class="date-warp">
+                <view class="date-child" wx:for="{{dateInfo}}" wx:key="unique">
+                    <view>{{item.day}}</view>
+                    <image src="../../images/small_checked.png" wx:if="{{item.isCheck}}"></image>
+                    <image src="../../images/small_unchecked.png" wx:else></image>
+                </view>
+            </view>
+        </view>
+        <view bindtap="setNotice" class="notice-warp">
+            <text class="notice-title">公告</text>
+            <text class="notice-content">{{habitNotice}}</text>
+            <image class="statistics-go" src="/images/arrow.png" wx:if="{{!grouper}}"></image>
+            <text class="notice-edit" wx:if="{{grouper}}">编辑</text>
+        </view>
+    </view>
+</view>
+<view class="heart-note-warp">
+    <view class="swiper-tab">
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==0?'on':''}}" data-current="0">最新</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==1?'on':''}}" data-current="1">概况</view>
+        <view bindtap="swichNav" class="swiper-tab-list {{currentTab==2?'on':''}}" data-current="2" style="display:none">排行榜</view>
+        <view bindtap="toManage" class="manage-btn" wx:if="{{grouper}}">
+            <view class="manage-text">管理成员</view>
+            <image class="manage-go" src="/images/arrow.png"></image>
+        </view>
+        <view bindtap="clickHabit" class="small-feed">我的记录</view>
+    </view>
+    <view class="swiper-box">
+        <view wx:if="{{currentTab==0}}">
+            <view class="privite-warp">
+                <view class="privite-text">我的记录是否公开到萌芽学堂</view>
+                <switch bindchange="priviteChange" checked="{{!isPrivate}}" class="privite-checked" color="#1f82d2"></switch>
+            </view>
+            <view class="scroll-view-item" wx:for="{{feedList}}" wx:for-index="idx" wx:key="id">
+                <view class="item-ans">
+                    <image bindtap="toUserPage" data-user="{{item.user_id}}" src="{{item.avatar_small}}"></image>
+                    <view class="item-day">
+                        <view bindtap="toUserPage" data-user="{{item.user_id}}">{{item.nickname==''?'萌友':item.nickname}}</view>
+                        <view class="insist">坚持
+              <text style="color:#666666">#{{item.habit_name}}#</text>
+                        </view>
+                    </view>
+                    <view class="item-pv">
+                        <view>{{item.add_time}}</view>
+                        <view class="days">{{item.days}}天</view>
+                    </view>
+                </view>
+                <image bindtap="handleViewImage" class="item-pic" data-src="{{item.pic_url+'?x-oss-process=image/resize,w_750'}}" mode="widthFix" src="{{item.pic_url+'?x-oss-process=image/resize,m_pad,h_600,w_750'}}" wx:if="{{item.pic_url}}"></image>
+                <view class="item-title" wx:if="{{item.note!=''}}">
+                    <text bindlongtap="copyNote" data-text="{{item.note}}" selectable="true">{{item.note}}</text>
+                </view>
+                <view class="comment-list-warp">
+                    <view bindtap="clickReply" class="comment-item" data-id="{{commentItem.id}}" data-index="{{idx}}" data-user="{{commentItem.nickname}}" wx:for="{{item.comment}}" wx:for-index="commentIdx" wx:for-item="commentItem" wx:key="commentItem.id">
+                        <text>{{commentItem.nickname}}</text>
+                        <text style="color: #666666" wx:if="{{commentItem.atUserId}}">回复</text>
+                        <text wx:if="{{commentItem.atUserId}}">{{commentItem.atUser}}</text>:{{commentItem.content}}
+          </view>
+                </view>
+                <input adjustPosition="true" bindblur="hideComment" bindconfirm="sendComment" class="comment-input" confirmType="发布" data-id="{{item.id}}" data-index="{{idx}}" focus="{{item.isComment}}" placeholder="{{atUserName}}" type="text" wx:if="{{item.isComment}}"></input>
+                <view class="item-time">
+                    <view bindtap="likeHabitNote" class="insist-like" data-id="{{idx}}">
+                        <image src="/images/like_pressed.png" wx:if="{{item.isLike}}"></image>
+                        <image src="/images/like_normal.png" wx:else></image>{{item.prop_count}}</view>
+                    <view class="insist-comment">
+                        <login-view bind:onLoginSuccess="clickComment" data-index="{{idx}}" payload="{{item.habit_id}}">
+                            <form data-id="{{item.habit_id}}" reportSubmit="true">
+                                <button class="commnent-btn" formType="submit">
+                                    <image src="/images/comment_normal.png"></image>{{item.comment_count}}
+                </button>
+                            </form>
+                        </login-view>
+                    </view>
+                    <button class="insist-share" data-day="{{item.days}}" data-id="{{item.id}}" data-name="{{item.habit_name}}" data-path="{{item.pic_url+'?x-oss-process=image/resize,w_750,h_600'}}" openType="share">
+                        <image src="/images/ft_share.png"></image>
+                    </button>
+                </view>
+            </view>
+            <view class="note-empty" wx:if="{{isEmpty}}">
+                <text>点击灰色按钮签到记录
+        <br></br>邀请更多的好友一起来记录哦</text>
+            </view>
+        </view>
+        <view wx:if="{{currentTab==1}}">
+            <view class="ft-all">
+                <text>总人数: {{ft_user}}</text>
+                <text>{{isLastDay?'昨天':'今天'}}已打卡: {{ft_check}}</text>
+                <text>未打卡: {{ft_user-ft_check}}</text>
+                <text bindtap="onLastDay" class="ft-last-day">{{isLastDay?'<今天':'昨天>'}}</text>
+            </view>
+            <view class="fter-view-item" wx:for="{{userList}}" wx:key="id">
+                <view class="fter-item-ans">
+                    <image bindtap="toUserPage" data-user="{{item.user_id}}" src="{{item.avatar_small}}"></image>
+                    <view class="fter-item-day">
+                        <view bindtap="toUserPage" data-user="{{item.user_id}}">{{item.nickname}}</view>
+                        <view>已坚持
+              <text style="color:#3dcc79"> {{item.days}} </text>天</view>
+                    </view>
+                    <view class="check-status">{{isLastDay?'昨天':'今天'}}{{item.is_check==1?'已打卡':'未打卡'}}</view>
+                    <button class="remind-remove" data-user="{{item.user_id}}">移出</button>
+                    <view>
+                        <button class="remind-share" data-invite="2" data-name="{{item.nickname}}" openType="share" wx:if="{{item.is_check!=1}}">提醒他</button>
+                        <button class="remind-check" data-days="{{item.days}}" data-invite="3" data-name="{{item.nickname}}" openType="share" wx:if="{{item.is_check==1}}">赞扬他</button>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{currentTab==2}}">
+            <view class="scroll-view-item" wx:for="{{feedList}}" wx:for-index="idx" wx:key="id">
+                <view class="item-ans">
+                    <image bindtap="toUserPage" data-user="{{item.user_id}}" src="{{item.avatar_small}}"></image>
+                    <view class="item-day">
+                        <view bindtap="toUserPage" data-user="{{item.user_id}}">{{item.nickname==''?'萌友':item.nickname}}</view>
+                        <view class="insist">坚持
+              <text style="color:#666666">#{{item.habit_name}}#</text>
+                        </view>
+                    </view>
+                    <view class="item-pv">
+                        <view>{{item.add_time}}</view>
+                        <view class="days">{{item.days}}天</view>
+                    </view>
+                </view>
+                <image bindtap="handleViewImage" class="item-pic" data-src="{{item.pic_url+'?x-oss-process=image/resize,w_750'}}" mode="widthFix" src="{{item.pic_url+'?x-oss-process=image/resize,m_pad,h_600,w_750'}}" wx:if="{{item.pic_url}}"></image>
+                <view class="item-title" wx:if="{{item.note!=''}}">
+                    <text bindlongtap="copyNote" data-text="{{item.note}}" selectable="true">{{item.note}}</text>
+                </view>
+                <view class="comment-list-warp">
+                    <view bindtap="clickReply" class="comment-item" data-id="{{commentItem.id}}" data-index="{{idx}}" data-user="{{commentItem.nickname}}" wx:for="{{item.comment}}" wx:for-index="commentIdx" wx:for-item="commentItem" wx:key="commentItem.id">
+                        <text>{{commentItem.nickname}}</text>
+                        <text style="color: #666666" wx:if="{{commentItem.atUserId}}">回复</text>
+                        <text wx:if="{{commentItem.atUserId}}">{{commentItem.atUser}}</text>:{{commentItem.content}}
+          </view>
+                </view>
+                <input adjustPosition="true" bindblur="hideComment" bindconfirm="sendComment" class="comment-input" confirmType="发布" data-id="{{item.id}}" data-index="{{idx}}" focus="{{item.isComment}}" placeholder="{{atUserName}}" type="text" wx:if="{{item.isComment}}"></input>
+                <view class="item-time">
+                    <view bindtap="likeHabitNote" class="insist-like" data-id="{{idx}}">
+                        <image src="/images/like_pressed.png" wx:if="{{item.isLike}}"></image>
+                        <image src="/images/like_normal.png" wx:else></image>{{item.prop_count}}</view>
+                    <view class="insist-comment">
+                        <login-view bind:onLoginSuccess="clickComment" data-index="{{idx}}" payload="{{item.habit_id}}">
+                            <form data-id="{{item.habit_id}}" reportSubmit="true">
+                                <button class="commnent-btn" formType="submit">
+                                    <image src="/images/comment_normal.png"></image>{{item.comment_count}}
+                </button>
+                            </form>
+                        </login-view>
+                    </view>
+                    <button class="insist-share" data-day="{{item.days}}" data-id="{{item.id}}" data-name="{{item.habit_name}}" data-path="{{item.pic_url+'?x-oss-process=image/resize,w_750,h_600'}}" openType="share">
+                        <image src="/images/ft_share.png"></image>
+                    </button>
+                </view>
+            </view>
+            <view class="note-empty" wx:if="{{isEmpty}}">
+                <text>点击灰色按钮签到记录
+        <br></br>努力坚持，生成属于自己的坚持记录</text>
+            </view>
+        </view>
+    </view>
+    <view class="loadmore">
+        <text>{{loadmore==-1?'从这里开始坚持，不断努力~':loadmore==1?'':'正在加载...'}}</text>
+    </view>
+</view>
+<view class="login-join-warp" wx:if="{{!isLogin||!isJoin}}">
+    <view class="join-habit-warp">
+        <view class="join-desc-warp">
+            <login-view bind:onLoginSuccess="joinHabit">
+                <view class="join-btn">加入圈子</view>
+            </login-view>
+            <view class="join-un-login">加入圈子查看更多精彩内容</view>
+            <view class="join-un-login" wx:if="{{!isLogin}}">未登陆，加入自动登录</view>
+        </view>
+    </view>
+</view>
+<view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
+    <view bindtap="hideModal" class="modals-cancel"></view>
+    <view animation="{{animationData}}" class="bottom-dialog-body bottom-pos">
+        <button class="modals-share-btn" data-invite="1" openType="share">
+            <view>转发到微信群</view>
+        </button>
+        <button class="modals-share-btn" data-invite="1" openType="share">
+            <view>转发给好友</view>
+        </button>
+        <button bindtap="groupCard" class="modals-share-btn">
+            <view>圈子二维码</view>
+        </button>
+        <button bindtap="hideModal" class="modals-share-btn">
+            <view>取消</view>
+        </button>
+    </view>
+</view>
+<view animation="{{btnAnimation}}" class="option-warp">
+    <button bindtap="showModal" class="record-card-btn" wx:if="{{isLogin}}">
+        <view>分享</view>
+        <image class="share-icon" src="/images/bottom_share.png"></image>
+    </button>
+</view>
